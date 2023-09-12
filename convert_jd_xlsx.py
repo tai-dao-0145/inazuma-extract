@@ -19,8 +19,7 @@ def convert_xlsx_to_text(file_path):
     return text.strip().replace("\n", " ")
 
 
-# text = convert_xlsx_to_text(jd_example)
-# print(text)
+# print(convert_xlsx_to_text('jd_example/7.xlsx'))
 
 def location(from_word, end_word, text):
     pattern = r'({}) (.+?) ({})'.format(from_word, end_word)
@@ -30,9 +29,13 @@ def location(from_word, end_word, text):
     else:
         return ''
 
+def extratext_status(text):
+    return location(constant_jd.JAPANESE_LEVEL, constant_jd.WORK_LOCATION, text).strip()
+def extratext_japanese_level(text):
+    return location(constant_jd.JAPANESE_LEVEL, constant_jd.WORK_LOCATION, text).strip()
 
 def extratext_carrer_master(text):
-    return location(constant_jd.BRANCH, constant_jd.CAREER, text).strip()
+    return location(constant_jd.WORK_INDUSTRY, constant_jd.CAREER, text).strip()
 
 
 def extratext_word_location(text):
@@ -52,11 +55,11 @@ def extratext_word_content(text):
 
 
 def extratext_experience(text):
-    return location(constant_jd.EXPERIENCE, constant_jd.WAGE, text).strip()
+    return location(constant_jd.EXPERIENCE, constant_jd.SALARY, text).strip()
 
 
 def extratext_wage(text):
-    return location(constant_jd.WAGE, constant_jd.OVERTIME, text).strip()
+    return location(constant_jd.SALARY, constant_jd.OVERTIME, text).strip()
 
 
 def extratext_overtime(text):
@@ -113,6 +116,7 @@ def checkDuplicate(text, array):
 
 
 career_master = []
+japanese_level = []
 word_location = []
 highlight = []
 number_recruitment = []
@@ -138,6 +142,9 @@ for i in range(2, 23, 1):
 
     extracted_career_master = extratext_carrer_master(text)
     checkDuplicate(extracted_career_master, career_master)
+
+    extracted_japanese_level = extratext_japanese_level(text)
+    checkDuplicate(extracted_japanese_level, japanese_level)
 
     extracted_word_location = extratext_word_location(text)
     checkDuplicate(extracted_word_location, word_location)
@@ -191,6 +198,7 @@ for i in range(2, 23, 1):
     checkDuplicate(extracted_onboard, onboard)
 
 print(career_master)
+print(japanese_level)
 print(word_location)
 print(highlight)
 print(number_recruitment)
@@ -221,6 +229,7 @@ def write_arrays_to_txt(content, output_file):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
+output_japanese_level = "tiengnhat.txt"
 output_career_master = "nghanh.txt"
 output_word_location = "diadiemlamviec.txt"
 output_highlight = "diemnoibat.txt"
@@ -240,22 +249,22 @@ output_day_off = "ngaynghi.txt"
 output_welfare = "phucloi.txt"
 output_onboard = "thoidiemvaocty.txt"
 
-
-write_arrays_to_txt(career_master, output_career_master)
-write_arrays_to_txt(word_location, output_word_location)
-write_arrays_to_txt(highlight, output_highlight)
-write_arrays_to_txt(number_recruitment, output_number_recruitment)
-write_arrays_to_txt(word_content, output_word_content)
-write_arrays_to_txt(experience, output_experience)
-write_arrays_to_txt(wage, output_wage)
-write_arrays_to_txt(overtime, output_overtime)
-write_arrays_to_txt(estimated_monthly_salary, output_estimated_monthly_salary)
-write_arrays_to_txt(estimated_income, output_estimated_income)
-write_arrays_to_txt(bonus, output_bonus)
-write_arrays_to_txt(salary_increase, output_salary_increase)
-write_arrays_to_txt(working_time, output_working_time)
-write_arrays_to_txt(company_house, output_company_house)
-write_arrays_to_txt(subsidize, output_subsidize)
-write_arrays_to_txt(day_off, output_day_off)
-write_arrays_to_txt(welfare, output_welfare)
-write_arrays_to_txt(onboard, output_onboard)
+# write_arrays_to_txt(japanese_level, output_japanese_level)
+# write_arrays_to_txt(career_master, output_career_master)
+# write_arrays_to_txt(word_location, output_word_location)
+# write_arrays_to_txt(highlight, output_highlight)
+# write_arrays_to_txt(number_recruitment, output_number_recruitment)
+# write_arrays_to_txt(word_content, output_word_content)
+# write_arrays_to_txt(experience, output_experience)
+# write_arrays_to_txt(wage, output_wage)
+# write_arrays_to_txt(overtime, output_overtime)
+# write_arrays_to_txt(estimated_monthly_salary, output_estimated_monthly_salary)
+# write_arrays_to_txt(estimated_income, output_estimated_income)
+# write_arrays_to_txt(bonus, output_bonus)
+# write_arrays_to_txt(salary_increase, output_salary_increase)
+# write_arrays_to_txt(working_time, output_working_time)
+# write_arrays_to_txt(company_house, output_company_house)
+# write_arrays_to_txt(subsidize, output_subsidize)
+# write_arrays_to_txt(day_off, output_day_off)
+# write_arrays_to_txt(welfare, output_welfare)
+# write_arrays_to_txt(onboard, output_onboard)
